@@ -1,0 +1,13 @@
+{
+  "paths": {
+    "test": {
+      "get": {},
+      "post": {
+        "response": {
+          "status": 200,
+          "body": { "title": "This is a sample response" }
+        }
+      }
+    }
+  }
+}

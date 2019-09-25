@@ -1,0 +1,25 @@
+{
+  "name": "mock_the_stub",
+  "version": "1.0.0",
+  "description": "Configurable local http test server",
+  "main": "src/index.js",
+  "keywords": [
+    "http",
+    "mock",
+    "json",
+    "server"
+  ],
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LeftHandFreeStudio/mock_http_server"
+  },
+  "bin": {
+    "mck": "./src/index.js"
+  },
+  "author": "Maciej Kawka",
+  "license": "MIT"
+}
