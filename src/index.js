@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const gen = require('./random/randomGenerator');
 let config = require('../config/defaultConfig.json');
 
 try {
@@ -11,7 +10,6 @@ try {
 } catch {}
 
 const seed = getRandomSeedFromConfig();
-const random = gen.getRandomGeneratorWithSeed(seed);
 const app = express();
 
 app.use(cors());
