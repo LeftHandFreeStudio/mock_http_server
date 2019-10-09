@@ -10,7 +10,6 @@ try {
 } catch {}
 
 const app = express();
-const defaultPort = config.port ? config.port : 6969;
 
 app.use(cors());
 
@@ -35,5 +34,4 @@ Object.keys(config.paths).forEach(path => {
   });
 });
 
-app.listen(defaultPort);
-console.log(`Mock server running on port ${defaultPort}`);
+module.exports.app = app;
