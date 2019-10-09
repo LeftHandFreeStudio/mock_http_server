@@ -1,7 +1,20 @@
 {
   "paths": {
     "test": {
-      "get": {},
+      "get": {
+        "response": {
+          "status": 200,
+          "generateResponse": {
+            "locale": "de",
+            "seed": 1234,
+            "count": 10,
+            "objectProperties": [
+              { "value": "lastName", "path": "name.lastName" },
+              { "value": "firstName", "path": "name.firstName" }
+            ]
+          }
+        }
+      },
       "post": {
         "response": {
           "status": 200,
