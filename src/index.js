@@ -49,21 +49,30 @@ function generateResposnseFromObject(generatedResposneParameters) {
   if (locale) {
     faker.locale = locale;
   }
+
+  if (count === 0) {
+    return generateObjectFromProperties(objectProperties);
+  }
+
   for (let k = 0; k < count; k++) {
-    let newResponseElement = {};
-    objectProperties.forEach(param => {
-      const paramParts = param.path.split('.');
-      let fakerRef = faker;
-      paramParts.forEach(part => {
-        if (fakerRef[part]) {
-          fakerRef = fakerRef[part];
-        }
-      });
-      newResponseElement[param.value] = fakerRef();
-    });
-    response.push(newResponseElement);
+    response.push(generateObjectFromProperties(objectProperties));
   }
   return response;
+}
+
+function generateObjectFromProperties(objectProperties) {
+  let newResponseElement = {};
+  objectProperties.forEach(param => {
+    const paramParts = param.path.split('.');
+    let fakerRef = faker;
+    paramParts.forEach(part => {
+      if (fakerRef[part]) {
+        fakerRef = fakerRef[part];
+      }
+    });
+    newResponseElement[param.value] = fakerRef();
+  });
+  return newResponseElement;
 }
 
 function getRandomSeedFromConfig() {
