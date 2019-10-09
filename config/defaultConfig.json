@@ -2,7 +2,9 @@
   "paths": {
     "test": {
       "get": {
-        "generateResponse": {}
+        "generateResponse": {
+          "seed": 1234
+        }
       },
       "post": {
         "response": {
@@ -11,6 +13,5 @@
         }
       }
     }
-  },
-  "generator": { "seed": 1234 }
+  }
 }
