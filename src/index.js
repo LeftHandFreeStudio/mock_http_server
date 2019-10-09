@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const gen = require('./random/randomGenerator');
 let config = require('../config/defaultConfig.json');
 
 try {
@@ -9,6 +10,8 @@ try {
   console.log('Using custom config from config.json.');
 } catch {}
 
+const seed = getRandomSeedFromConfig();
+const random = gen.getRandomGeneratorWithSeed(seed);
 const app = express();
 
 app.use(cors());
@@ -33,5 +36,12 @@ Object.keys(config.paths).forEach(path => {
     }
   });
 });
+
+function getRandomSeedFromConfig() {
+  if (config.generator && config.generator.seed) {
+    return config.generator.seed;
+  }
+  return Math.floor(Math.random() * 10e6);
+}
 
 module.exports.app = app;
