@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const faker = require('faker');
 let config = require('../config/defaultConfig.json');
 
 try {
@@ -24,8 +25,14 @@ Object.keys(config.paths).forEach(path => {
     const endPoint = app[method].bind(app);
     if (methodObject.response) {
       const response = methodObject.response;
+      let responseBody;
+      if (response.generateResponse) {
+        responseBody = generateResposnseFromObject(response.generateResponse);
+      } else {
+        responseBody = response.body;
+      }
       endPoint('/' + path, function(req, res) {
-        res.status(response.status).json(response.body);
+        res.status(response.status).json(responseBody);
       });
     } else {
       endPoint('/' + path, function(req, res) {
@@ -34,6 +41,27 @@ Object.keys(config.paths).forEach(path => {
     }
   });
 });
+
+function generateResposnseFromObject(parameters) {
+  const { seed, count, options } = parameters;
+  let response = [];
+  faker.seed(seed);
+  for (let k = 0; k < count; k++) {
+    let newResponseElement = {};
+    options.forEach(param => {
+      const paramParts = param.path.split('.');
+      let fakerRef = faker;
+      paramParts.forEach(part => {
+        if (fakerRef[part]) {
+          fakerRef = fakerRef[part];
+        }
+      });
+      newResponseElement[param.value] = fakerRef();
+    });
+    response.push(newResponseElement);
+  }
+  return response;
+}
 
 function getRandomSeedFromConfig() {
   if (config.generator && config.generator.seed) {

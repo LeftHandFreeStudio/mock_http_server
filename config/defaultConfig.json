@@ -2,8 +2,16 @@
   "paths": {
     "test": {
       "get": {
-        "generateResponse": {
-          "seed": 1234
+        "response": {
+          "status": 200,
+          "generateResponse": {
+            "seed": 1234,
+            "count": 10,
+            "options": [
+              { "value": "lastName", "path": "name.lastName" },
+              { "value": "firstName", "path": "name.firstName" }
+            ]
+          }
         }
       },
       "post": {
