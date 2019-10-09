@@ -42,13 +42,16 @@ Object.keys(config.paths).forEach(path => {
   });
 });
 
-function generateResposnseFromObject(parameters) {
-  const { seed, count, options } = parameters;
+function generateResposnseFromObject(generatedResposneParameters) {
+  const { seed, count, objectProperties, locale } = generatedResposneParameters;
   let response = [];
   faker.seed(seed);
+  if (locale) {
+    faker.locale = locale;
+  }
   for (let k = 0; k < count; k++) {
     let newResponseElement = {};
-    options.forEach(param => {
+    objectProperties.forEach(param => {
       const paramParts = param.path.split('.');
       let fakerRef = faker;
       paramParts.forEach(part => {

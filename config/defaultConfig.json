@@ -5,9 +5,10 @@
         "response": {
           "status": 200,
           "generateResponse": {
+            "locale": "de",
             "seed": 1234,
             "count": 10,
-            "options": [
+            "objectProperties": [
               { "value": "lastName", "path": "name.lastName" },
               { "value": "firstName", "path": "name.firstName" }
             ]
